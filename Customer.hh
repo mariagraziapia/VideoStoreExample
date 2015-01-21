@@ -24,7 +24,11 @@ private:
   // Extract Method
   double amountFor( const Rental& each ) const;
 
+  // Replace Temp with Query
+  double getTotalCharge();
+
 };
+
 
 inline Customer::Customer() {}
 
