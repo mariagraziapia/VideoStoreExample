@@ -26,7 +26,7 @@ private:
 
   // Replace Temp with Query
   double getTotalCharge();
-
+  int getTotalFrequentRenterPoints();
 };
 
 

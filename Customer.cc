@@ -5,8 +5,7 @@
 
 std::string Customer::statement()
 {
-  double totalAmount = 0;
-  int frequentRenterPoints = 0;
+  
   std::vector< Rental >::iterator iter = _rentals.begin();
   std::vector< Rental >::iterator iter_end = _rentals.end();
   std::ostringstream result;
@@ -15,17 +14,14 @@ std::string Customer::statement()
    
     Rental each = *iter;
 
-    // add frequent renter points
-    frequentRenterPoints += each.getFrequentRenterPoints();
-
     // show figures for this rental
     result << "\t" << each.getMovie().getTitle() << "\t"
            << each.getCharge() << "\n";
-   
   }
+
   // add footer lines
   result << "Amount owed is " << getTotalCharge() << "\n";
-  result << "You earned " << frequentRenterPoints
+  result << "You earned " << getTotalFrequentRenterPoints()
          << " frequent renter points";
   return result.str();
 }
@@ -43,6 +39,18 @@ double Customer::getTotalCharge()
   for ( ; iter != iter_end; ++iter ) {
     Rental each = *iter;
     result += each.getCharge();
+  }
+  return result;
+}
+
+int Customer::getTotalFrequentRenterPoints()
+{
+  int result = 0;
+  std::vector< Rental >::iterator iter = _rentals.begin();
+  std::vector< Rental >::iterator iter_end = _rentals.end();
+  for ( ; iter != iter_end; ++iter ) {
+    Rental each = *iter;
+    result += each.getFrequentRenterPoints();
   }
   return result;
 }
