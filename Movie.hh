@@ -15,6 +15,8 @@ public:
   void setPriceCode( int arg );
   std::string getTitle() const;
 
+  double getCharge( int daysRented ) const;
+
 private:
   std::string _title;
   int _priceCode;

@@ -4,28 +4,23 @@ VideoStore Refactoring Example
 The following is an excerpt from: M. Fowler, Refactoring, Addison-Wesley 
 Professional, 1999.
 
-I am now at the point where I can take off my refactoring hat and put
-on my adding function hat. I can write htmlStatement as follows and
-add appropriate tests.
+Replacing the Conditional Logic on Price Code with Polymorphism
 
-By extracting the calculations I can create the htmlStatement method
-and reuse all of the calculation code that was in the original
-statement method. I didn't copy and paste, so if the calculation rules
-change I have only one place in the code to go. Any other kind of
-statement will be really quick and easy to prepare. The refactoring
-did not take long. I spent most of the time figuring out what the code
-did, and I would have had to do that anyway.
+The first part of this problem is that switch statement. It is a bad
+idea to do a switch based on and attribute of another object. If you
+must use a switch statement, it should be on your own data, not on
+someone else's.
 
-Some code is copied from the ASCII version, mainly due to setting up
-the loop. Further refactoring could clean that up. Extracting methods
-for header, footer and detail line are one route I could take. You can
-see how to do this in the example for Form Template Method (345). But
-now the users are clamoring again. They are getting ready to change
-the classification of the movies in the store. It's still not clear
-what changes they want to make, but it sounds like new classifications
-will be introduced, and the existing ones could well be changed. The
-charges and frequent renter point allocations for these
-classifications are to be decided. At the moment, making these kind of
-changes is awkward. I have to get into the charge and frequent renter
-point methods and alter the conditional code to make changes to film
-classifications. Back on with the refactoring hat.
+This implies that getCharge should move onto movie.
+
+For this to work I had to pass in the length of the rental, which of
+course is data from the rental. The method effectively uses two pieces
+of data, the length of the rental and the type of the movie. Why do I
+prefer to pass the length of the rental to the movie rather than the
+movie type to the rental? It's because the proposed changes are all
+about adding new types. Type information generally tends to be more
+volatile. If I change the movie type, I want the least ripple effect,
+so I prefer to calculate the charge within the movie.
+
+I compiled the method into movie and then changed the getCharge on
+rental to use the new method.
