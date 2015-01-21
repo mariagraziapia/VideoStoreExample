@@ -7,11 +7,9 @@ public:
   virtual ~Price();
   virtual int getPriceCode() const = 0;
 
-  virtual double getCharge( int daysRented ) const;
+  virtual double getCharge( int daysRented ) const = 0;
 };
 
-inline Price::
-~Price()
-{}
+inline Price::~Price() {}
 
 #endif // PRICE_HH
