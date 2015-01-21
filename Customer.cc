@@ -15,10 +15,8 @@ std::string Customer::statement()
   std::ostringstream result;
   result << "Rental Record for " << getName() << "\n";
   for ( ; iter != iter_end; ++iter ) {
-    double thisAmount = 0;
+   
     Rental each = *iter;
-
-    thisAmount = amountFor( each );
 
     // add frequent renter points
     frequentRenterPoints++;
@@ -28,8 +26,8 @@ std::string Customer::statement()
 
     // show figures for this rental
     result << "\t" << each.getMovie().getTitle() << "\t"
-           << thisAmount << "\n";
-    totalAmount += thisAmount;
+           << each.getCharge() << "\n";
+    totalAmount += each.getCharge();
   }
   // add footer lines
   result << "Amount owed is " << totalAmount << "\n";
