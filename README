@@ -1,14 +1,25 @@
-Once it is moved I can start using Replace Conditional with
-Polymorphism (255).
+VideoStore Refactoring Example
+------------------------------
 
-I do this by taking one leg of the case statement at time and creating
-an overriding method. I start with RegularPrice.
+The following is an excerpt from: M. Fowler, Refactoring, Addison-Wesley 
+Professional, 1999.
 
-This overrides the parent case statement, which I just leave as it
-is. I compile and test for this case then take the next leg, compile
-and test. (To make sure I'm executing the subclass code, I like to
-throw in a deliberate bug and run it to ensure the tests blow up. Not
-that I'm paranoid or anything.)
+I can now do the same procedure with getFrequentRenterPoints. 
 
-When I've done that with all the legs, I make Price::getCharge a pure virtual 
-function.
+In this case however, I don't make the superclass method pure
+virtual. Instead, I create an overriding method for the new releases
+and leave a defined method (as the default) on the superclass.
+
+Putting in the state pattern was quite an effort. Was it worth it? The
+gain is that if I change any price's behavior, add new prices, or add
+extra price-dependent behavior, the change will be much easier to
+make. The rest of the application does not know about the use of the
+state pattern. For the tiny amout of behavior I currently have, it is
+not a big deal. In a more complex system with a dozen or so
+price-dependent methods, this would make a big difference. All these
+changes were small steps. It seems slow to write it this way, but not
+once did I have to open the debugger, so the process actually flowed
+quite quickly. It took me much longer to write this section of the
+book than it did to change the code.
+
+I've now completed the second major refactoring.
