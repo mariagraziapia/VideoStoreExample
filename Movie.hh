@@ -3,6 +3,8 @@
 #define MOVIE_HH
 #include <string>
 
+#include "Price.hh"
+
 class Movie {
 public:
   static const int CHILDRENS   = 2;
@@ -10,6 +12,11 @@ public:
   static const int NEW_RELEASE = 1;
 
   Movie( const std::string& title, int priceCode = REGULAR );
+
+  Movie( const Movie& );
+  ~Movie();
+
+  Movie& operator=( const Movie& rhs );
 
   int getPriceCode() const;
   void setPriceCode( int arg );
@@ -20,13 +27,13 @@ public:
 
 private:
   std::string _title;
-  int _priceCode;
+  Price* _price;
 };
 
-
-inline int Movie::getPriceCode() const { return _priceCode; }
-
-inline void Movie::setPriceCode( int arg ) { _priceCode = arg; }
+inline Movie::~Movie()
+{
+  delete _price;
+}
 
 inline std::string Movie::getTitle() const { return _title; }
 
