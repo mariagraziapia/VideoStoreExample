@@ -54,3 +54,24 @@ int Customer::getTotalFrequentRenterPoints()
   }
   return result;
 }
+
+std::string Customer::htmlStatement()
+{
+  std:: vector< Rental >::iterator iter = _rentals.begin();
+  std::vector< Rental >::iterator iter_end = _rentals.end();
+  std::ostringstream result;
+  result << "<H1>Rentals for <EM>" << getName() << "</EM></H1><P>\n";
+  for ( ; iter != iter_end; ++iter ) {
+    Rental each = *iter;
+    // show figures for each rental
+    result << each.getMovie().getTitle() << ": "
+           << each.getCharge() << "<BR>\n";
+  }
+  // add footer lines
+  result << "<P>You owe <EM>" << getTotalCharge() << "</EM><P>\n";
+  result << "On this rental you earned <EM>"
+         << getTotalFrequentRenterPoints()
+         << "</EM> frequent renter points<P>";
+  return result.str();
+}
+ 
