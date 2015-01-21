@@ -4,37 +4,34 @@ VideoStore Refactoring Example
 The following is an excerpt from: M. Fowler, Refactoring, Addison-Wesley 
 Professional, 1999.
 
-The First Step in Refactoring
+Decomposing and Redistributing the Statement Method
 
-Whenever I do refactoring, the first step is always the same. I need
-to build a solid set of tests for that section of code. The tests are
-essential because even though I follow refactorings structured to
-avoid most of the opportunities for introducing bugs, I'm still human
-and still make mistakes. Thus I need solid tests.
+The obvious first target of my attention is the overly long statement
+method. When I look at a long method like that, I am looking to
+decompose the method into smaller pieces. Smaller pieces of code tend
+to make things more manageable. They are easier to work with and move
+around.
 
-Because the statement result produces a string, I create a few
-customers, give each customer a few rentals of various kinds of films,
-and generate the statement strings. I then do a string comparison
-between the new string and some reference strings that I have hand
-checked. I set up all of these tests so I can run them from one
-command on the command line. The tests take only a few seconds to run,
-and as you will see, I run them often.
+The first phase of refactorings in this chapter show how I split up
+the long method and move the pieces to better classes. My aim is to
+make it easier to write an HTML statement method with much less
+duplication of code.
 
-An important part of these tests is the way they report their
-results. They either say "OK", meaning that all the strings are
-identical to the reference strings, or they print a list of failures:
-lines that turned out differently. The tests are thus
-self-checking. It is vital to make tests self-checking. If you don't,
-you end up spending time hand checking some numbers from the test
-against some numbers of a desk pad, and that slows you down.
+My first step is to find a logical clump of code and use Extract
+Method (110). An obvious piece here is the switch statement. This
+looks like it would make a good chunk to extract into its own method.
 
-As we do the refactoring, we will lean on the tests. I'm going to be
-relying on the tests to tell me whether I introduce a bug. It is
-essential for refactoring that you have good tests. It's worth
-spending the time to build the tests, because the tests give you the
-security you need to change the program later. This is such an
-important part of refactoring that I go into more detail on testing in
-Chapter 4.
+When I extract a method, as in any refactoring, I need to know what
+can go wrong. If I do the extraction badly, I could introduce a bug
+into the program. So before I do the refactoring I need to figure out
+how to do it safely. I've done this refactoring a few times before, so
+I've written down the safe steps in the catalog.
 
-Before you start refactoring, check that you have a solid suite of
-tests. These tests must be self-checking.
+First I need to look in the fragment for any variables that are local
+in scope to the method we are looking at, the local variables and
+parameters. This segment of code uses two: each and thisAmount. Of
+these each is not modified by the code but thisAmount is modified. Any
+non-modified variable I can pass in as a parameter. Modified variables
+need more care. If there is only one, I can return it. The temp is
+initialized to 0 each time around the loop and is not altered until
+the switch gets to it. So I can just assign the result.
