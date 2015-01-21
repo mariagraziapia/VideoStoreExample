@@ -1,23 +1,19 @@
-# ---- Makefile for VideoStore refactoring example ----
-# Initial version: M.G. Pia, June 2014
-# Extended version: S. Kluth, September 2014
-# Adapted (removed use of Boost Test): M.G. Pia, January 2014
-
 CXX        = g++
 LD         = g++
 OPT        = -g
-CXXFLAGS   = -Wall $(OPT) 
+CXXFLAGS   = -Wall $(OPT)
 LDFLAGS    =
-SOURCES    = Customer.cc Movie.cc
+SOURCES    = Customer.cc Movie.cc 
 TESTSRC    = testVideoStore.cc
 OBJECTS    = $(SOURCES:.cc=.o) $(TESTSRC:.cc=.o)
 EXECUTABLE = $(basename $(TESTSRC) )
+# BOOSTTESTOPT = --log_level=message
 
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS) 
-	$(LD) $(LDFLAGS) -o $@ $^ 
-	./$@ 
+	$(LD) $(LDFLAGS) -o $@ $^ -lboost_unit_test_framework 
+	./$@ $(BOOSTTESTOPT)
 
 clean:
 	rm -f $(OBJECTS) $(EXECUTABLE)
