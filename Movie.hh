@@ -16,6 +16,7 @@ public:
   std::string getTitle() const;
 
   double getCharge( int daysRented ) const;
+  int getFrequentRenterPoints( int daysRented ) const;
 
 private:
   std::string _title;
