@@ -5,6 +5,12 @@ const int Movie::CHILDRENS;
 const int Movie::REGULAR;
 const int Movie::NEW_RELEASE;
 
+Movie::Movie( const std::string& title, int priceCode )
+  : _title( title )
+{
+  setPriceCode( priceCode );
+}
+
 double Movie::getCharge( int daysRented ) const
 {
   double result = 0;

@@ -23,10 +23,6 @@ private:
   int _priceCode;
 };
 
-inline Movie::Movie( const std::string& title, int priceCode ): 
-  _title( title ),
-  _priceCode( priceCode )
-{}
 
 inline int Movie::getPriceCode() const { return _priceCode; }
 
