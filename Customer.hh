@@ -22,7 +22,9 @@ private:
   std::vector< Rental > _rentals;
 
   // Extract Method
-  double amountFor( const Rental& each ) const;};
+  double amountFor( const Rental& each ) const;
+
+};
 
 inline Customer::Customer() {}
 
@@ -31,8 +33,7 @@ inline Customer::Customer( const std::string& name ):
 
 inline void Customer::addRental( const Rental& arg ) { _rentals.push_back( arg ); }
 
-inline std::string Customer::
-getName() const { return _name; }
+inline std::string Customer::getName() const { return _name; }
 
 
 #endif // CUSTOMER_HH

@@ -79,23 +79,12 @@ BOOST_AUTO_TEST_CASE( testgetCharge ) {
   BOOST_CHECK_EQUAL( charge, 3.5 );
 }
 
-// getFrequentRenterPoints
-BOOST_AUTO_TEST_CASE( testgetFrequentRenterPoints ) {
-  int points= rental.getFrequentRenterPoints();
-  BOOST_CHECK_EQUAL( points, 1 );
-  Movie newmovie( "New Movie" );
-  newmovie.setPriceCode( Movie::NEW_RELEASE );
-  Rental newrental( newmovie, 3 );  
-  int newpoints= newrental.getFrequentRenterPoints();
-  BOOST_CHECK_EQUAL( newpoints, 2 );
-}
-
 // Customer
 
 // getName
 BOOST_AUTO_TEST_CASE( testgetName ) {
   string name= customer.getName();
-  BOOST_CHECK_EQUAL( name, "Maria Grazia Pia" );  
+  BOOST_CHECK_EQUAL( name, "Maria Grazia Pia" );
 }
 
 // statement
